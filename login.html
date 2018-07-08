@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/lib/bootstrap-theme.min.css">
     <script src="js/script/js.cookie.min.js"></script>
     <script src="js/script/gibberish-aes.js"></script>
-
+    
     <title>원자재넷</title>
     <link rel="shortcut icon" href="https://assets-cdn.github.com/favicon.ico">
 
@@ -23,29 +23,27 @@
       <div class="col-md-4">
         <div class="container" style="width:98%; height:100%; display: flex; align-items: center;">
           <div class="container">
-            <form class="form-group">
-              <h2>Login</h2>
-              <div class="input-group">
-                <span class="input-group-form">
-                  <input class="form-control" id="passwordForm" type="password" placeholder="Password"/>
-                </span>
-                <span class="input-group-btn">
-                  <input class="btn btn-primary" id="connectButton" type="button" value="Connect"/>
-                </span>
-                <script src="js/script/main/login.js"></script>
-                <script type="text/javascript">
-                  $('#connectButton').on('click', function(){
-                    login();
-                  });
+            <h2>Login</h2>
+            <div class="input-group">
+              <span class="input-group-form">
+                <input class="form-control" id="passwordForm" type="password" placeholder="Password"/>
+              </span>
+              <span class="input-group-btn">
+                <input class="btn btn-primary" id="connectButton" type="button" value="Connect"/>
+              </span>
+              <script src="js/script/main/login.js"></script>
+              <script type="text/javascript">
+                $('#connectButton').on('click', function(){
+                  login();
+                });
 
-                  $('#passwordForm').on('keydown', function(key){
-                    if (key.keyCode == 13) {
-                      login();
-                    }
-                  });
-                </script>
-              </div>
-            </form>
+                $('#passwordForm').on('keydown', function(key){
+                  if (key.keyCode == 13) {
+                    login();
+                  }
+                });
+              </script>
+            </div>
           </div>
         </div>
       </div>
