@@ -13,6 +13,13 @@
     <script src="js/script/js.cookie.min.js"></script>
     <script src="js/script/gibberish-aes.js"></script>
 
+
+
+    <title>원자재넷</title>
+    <link rel="shortcut icon" href="https://assets-cdn.github.com/favicon.ico">
+
+  </head>
+  <body style="position: fixed; overflow-y: scroll; width: 100%;">
     <script type="text/javascript">
       if (Cookies.get("loginKey") === undefined){
         location.href = "/login";
@@ -23,17 +30,9 @@
           console.log(Gibberish.aesDecrypt(encryptedHtml, loginKey));
         } catch(e) {
           console.log("error");
+          console.log(e);
         }
       }
-    </script>
-
-    <title>원자재넷</title>
-    <link rel="shortcut icon" href="https://assets-cdn.github.com/favicon.ico">
-
-  </head>
-  <body style="position: fixed; overflow-y: scroll; width: 100%;">
-    <script type="text/javascript">
-
     </script>
   </body>
 </html>
