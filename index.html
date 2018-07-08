@@ -12,14 +12,7 @@
     <link rel="stylesheet" href="css/lib/bootstrap-theme.min.css">
     <script src="js/script/js.cookie.min.js"></script>
     <script src="js/script/gibberish-aes.js"></script>
-
-
-
-    <title>원자재넷</title>
-    <link rel="shortcut icon" href="https://assets-cdn.github.com/favicon.ico">
-
-  </head>
-  <body style="position: fixed; overflow-y: scroll; width: 100%;">
+    
     <script type="text/javascript">
       if (Cookies.get("loginKey") === undefined){
         location.href = "/login";
@@ -30,9 +23,16 @@
           document.write(GibberishAES.aesDecrypt(encryptedHtml, loginKey));
         } catch(e) {
           alert("비밀번호가 올바르지 않습니다");
+          Cookies.remove("loginKey");
           location.href = "/login";
         }
       }
     </script>
+
+    <title>원자재넷</title>
+    <link rel="shortcut icon" href="https://assets-cdn.github.com/favicon.ico">
+  </head>
+
+  <body style="position: fixed; overflow-y: scroll; width: 100%;">
   </body>
 </html>
