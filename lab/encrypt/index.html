@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+    <script src="/js/lib/jquery.min.js"></script>
+    <script src="/js/script/js.cookie.min.js"></script>
+    <script src="/js/script/gibberish-aes.js"></script>
+    <script src="/js/lib/bootstrap.min.js"></script>
+    <script src="/js/lib/bootstrap-select.min.js"></script>
+
+    <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/lib/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/lib/bootstrap-select.min.css">
+
+    <title>암호화 페이지</title>
+    <link rel="shortcut icon" href="https://assets-cdn.github.com/favicon.ico">
+  </head>
+
+  <body style="overflow-y: scroll; width: 100%; align-items: center;">
+    <div class="container">
+      <h2>Input</h2>
+      <div class="form-group" >
+        <textarea class="form-control" id="stringInputArea" style="overflow-y: auto; width: 100%;" rows=5></textarea>
+      </div>
+      <div class="form-group">
+        <input class="form-control" id="keyInput" type="text" placeholder=""/>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6 form-group" style="text-align: left">
+          <select class="selectpicker" id="bitSelector">
+            <option value="128">128 bit</option>
+            <option value="192">192 bit</option>
+            <option value="256" selected>256 bit</option>
+          </select>
+        </div>
+        <div class="col-sm-6 form-group" style="text-align: right">
+          <span>
+            <button type="button" class="btn btn-success" id="decryptButton">Decrypt</button>
+          </span>
+          <span>
+            <button type="button" class="btn btn-danger" id="encryptButton">Encrypt</button>
+          </span>
+          <script type="text/javascript">
+            $('#encryptButton').on('click', function(){
+              GibberishAES.size(parseInt($('#bitSelector')[0].value));
+              var encryptedText = GibberishAES.aesEncrypt($('#stringInputArea')[0].value,$('#keyInput')[0].value);
+              $('#stringOutputArea')[0].value = encryptedText.replace(/\n|\r/g,"");
+            });
+            $('#decryptButton').on('click', function(){
+              GibberishAES.size(parseInt($('#bitSelector')[0].value));
+              var decryptedText = GibberishAES.aesDecrypt($('#stringInputArea')[0].value,$('#keyInput')[0].value);
+              $('#stringOutputArea')[0].value = decryptedText;
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <h2>Output</h2>
+      <div class="form-group">
+        <textarea class="form-control" id="stringOutputArea" style="overflow-y: auto; width: 100%;" rows=5></textarea>
+      </div>
+    </div>
+  </body>
+</html>
