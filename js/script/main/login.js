@@ -5,6 +5,6 @@ function login(){
 }
 
 function logout(){
-  Cookies.remove("loginKey");
+  Cookies.remove("loginKey", {domain: location.hostname});
   location.href = "/login"
 }
