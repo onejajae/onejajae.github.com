@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <script type="text/javascript" src="/lab/crypto/bower_components/crypto-js/crypto-js.js"></script>
+    
+    <title>암호화 페이지</title>
+  </head>
+  <body style="overflow-y: scroll; width: 100%; align-items: center;">
+    <div id="top-navigation">
+      <script type="text/javascript">
+        $(document).ready( function() {
+          $("#top-navigation").load("/navigation.html");
+        });
+      </script>
+    </div>
+    
+    <div style="margin-top: 20px; margin-bottom: 20px">
+      <div class="container">
+        <nav>
+          <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active " id="nav-home-tab" data-toggle="tab" href="#crypto-tab" role="tab" aria-controls="crypto-tab" aria-selected="true">Crypto</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#hash-tab" role="tab" aria-controls="hash-tab" aria-selected="false">Hash</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#encoding-tab" role="tab" aria-controls="encoding-tab" aria-selected="false">Encoding</a>
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="crypto-tab" role="tabpanel" aria-labelledby="nav-home-tab">
+            <h2><label for="stringInputAreaCrypto">Input</label></h2>
+            <div class="form-group">
+              <textarea class="form-control" id="stringInputAreaCrypto" style="overflow-y: auto; width: 100%;" rows=5></textarea>
+            </div>
+            
+            <div class="form-group">
+              <h3><label for="keyInput">Key</label></h3>
+              <input class="form-control" id="keyInput" type="text" placeholder=""/>
+            </div>
+            
+            <div class="row">
+              <div class="col-sm-6 form-group" style="text-align: left">
+                <select class="custom-select" id="cryptoBitSelector" style="text-align: center">
+                  <option value="128">128 bit</option>
+                  <option value="192">192 bit</option>
+                  <option value="256" selected>256 bit</option>
+                </select>
+              </div>
+              <div class="col-sm-6 form-group" style="text-align: right">
+                <span>
+                  <button type="button" class="btn btn-success" id="decryptButton">Decrypt</button>
+                </span>
+                <span>
+                  <button type="button" class="btn btn-danger" id="encryptButton">Encrypt</button>
+                </span>
+              </div>
+            </div>
+            
+            <h2><label for="stringOutputAreaCrypto">Output</label></h2>
+            <div class="form-group">
+              <textarea class="form-control" id="stringOutputAreaCrypto" style="overflow-y: auto; width: 100%;" rows=5></textarea>
+            </div>
+            <script type="text/javascript">
+              $("#encryptButton").on('click', function(){
+                var inputCryptoString = $("#stringInputAreaCrypto").val();
+                var cryptoKeyString = $("#keyInput").val();
+                var encrypted = CryptoJS.AES.encrypt(inputCryptoString, cryptoKeyString);
+                $("#stringOutputAreaCrypto").val(encrypted);
+              });
+              $("#decryptButton").on('click', function(){
+                var inputCryptoString = $("#stringInputAreaCrypto").val();
+                var cryptoKeyString = $("#keyInput").val();
+                var decrypted = CryptoJS.AES.decrypt(inputCryptoString, cryptoKeyString).toString(CryptoJS.enc.Utf8);
+                $("#stringOutputAreaCrypto").val(decrypted);
+              })
+            </script>
+            
+          </div>
+          <div class="tab-pane fade" id="hash-tab" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <h2><label for="stringInputAreaHash">Input</label></h2>
+            <div class="form-group">
+              <textarea class="form-control" id="stringInputAreaHash" style="overflow-y: auto; width: 100%;" rows=5></textarea>
+            </div>
+            
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="algorithmSelector">Algorithms</label>
+              </div>
+              <select class="custom-select" id="algorithmSelector">
+                <option value="0">MD5</option>
+                <option value="1">SHA-1</option>
+                <option value="2" selected>SHA-256</option>
+                <option value="3">SHA-512</option>
+                <option value="4">SHA-3</option>
+              </select>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="hashButton">Hash!</button>
+              </div>
+            </div>
+            
+            <h2><label for="stringOutputAreaHash">Output</label></h2>
+            <div class="form-group">
+              <textarea class="form-control" id="stringOutputAreaHash" style="overflow-y: auto; width: 100%;" rows=5></textarea>
+            </div>
+            <script type="text/javascript">
+              var algorithmList = [CryptoJS.MD5,
+                                   CryptoJS.SHA1,
+                                   CryptoJS.SHA256,
+                                   CryptoJS.SHA512,
+                                   CryptoJS.SHA3];
+              $('#hashButton').on('click', function(){
+                var inputHashString = $("#stringInputAreaHash").val();
+                var algorithm = algorithmList[parseInt($("#algorithmSelector").val())];
+                var outputHashString = algorithm(inputHashString.toString(CryptoJS.enc.Base64));
+                $("#stringOutputAreaHash").val(outputHashString);
+              });
+            </script>
+          </div>
+          <div class="tab-pane fade" id="encoding-tab" role="tabpanel" aria-labelledby="nav-contact-tab">
+            인코딩 탭
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </body>
+</html>
