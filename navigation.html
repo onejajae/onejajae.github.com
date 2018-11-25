@@ -33,9 +33,18 @@
           </li>
         </ul>
         <span class="nav-item">
-          <button class="btn btn-sm btn-outline-light">
+          <script src="/js/script/main/login.js"></script>
+          <script src="/js/script/js.cookie.min.js"></script>
+          <button id="sessionButton" class="btn btn-sm btn-outline-light" onclick="logout();">
             로그아웃
           </button>
+          <script type="text/javascript">
+            if (Cookies.get("loginKey") === undefined){
+              $("#sessionButton").html("로그인").attr("onclick","location.href='/login'")
+            } else {
+              $("#sessionButton").html("로그아웃")
+            }
+          </script>
         </span>
       </div>
     </nav>

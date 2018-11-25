@@ -1,6 +1,6 @@
 function login(){
   var key = document.getElementById("passwordForm").value;
-  Cookies.set("loginKey", key, {domain: location.hostname});
+  Cookies.set("loginKey", CryptoJS.SHA256(key).toString(), {domain: location.hostname});
   location.href = "/"
 }
 
